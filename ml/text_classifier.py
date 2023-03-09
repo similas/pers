@@ -13,7 +13,7 @@ class TextClassifier():
         self.model = AutoModelForSequenceClassification.from_pretrained(self.check_point)
         
 
-    def inference(self, text: str)->None:
+    def inference(self, text: str) -> None:
         text = self.preprocessing(text)
         tokens = self.tokenizer(text, padding=True, 
                                 truncation=True,
@@ -24,6 +24,7 @@ class TextClassifier():
         label_num = argmax(output.logits)
         label_emotion = Config.labels_dict[label_num.item()]
         print(f"Emotion: {label_emotion}")
+        return label_emotion
 
     def preprocessing(self, text:str) -> str:
         print("preprocessor is loading...")
